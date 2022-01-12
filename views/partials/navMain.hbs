@@ -4,4 +4,12 @@
     <a href="/all-styles" title="all styles" class="link"><i class="fas fa-sliders-h fa-1x"></i></a>
     <a href="/all-albums" title="all albums" class="link"><i class="fas fa-record-vinyl"></i></a>
     <a href="/dashboard" title="dashboard" class="link"><i class="fa fa-user fa-1x"></i></a>
+    {{#unless currentUser}}
+    <a href="/auth/signup">signup</a>
+    <span>|</span>
+    <a href="/auth/signin">signin</a>
+    <span>|</span>
+    {{else}}
+    <a href="/auth/signout">signout</a>
+    {{/unless}}
 </nav>

@@ -11,9 +11,9 @@ router.get("/signup", (req, res, next) => {
   res.render("auth/signup");
 });
 
-router.get("signout", (req, res) => {
+router.get("/signout", (req, res) => {
   req.session.destroy(function (err) {
-    res.redirect("/auth/signin");
+    res.redirect("/");
   });
 });
 
@@ -21,7 +21,6 @@ router.post("/signin", async (req, res, next) => {
   try {
     const { email, password } = req.body;
     const foundUser = await userModel.findOne({ email: email });
-    console.log("_____________", foundUser);
     if (!foundUser) {
       req.flash("error", "Invalid credentials");
       res.redirect("/auth/signin");
@@ -35,13 +34,14 @@ router.post("/signin", async (req, res, next) => {
         delete userObject.password;
         req.session.currentUser = userObject;
         // req.flash("success", "Successfully logged in...");
-        res.redirect("/dashboard");
+        res.redirect("/");
       }
     }
   } catch (err) {
     next(err);
   }
 });
+
 
 router.post("/signup", async (req, res, next) => {
   try {
